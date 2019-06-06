@@ -1,19 +1,19 @@
 'use strict';
 
-var cloudWidth = 420;
-var cloudHeight = 270;
-var columnWidth = 40;
-var columnHeight = 150;
-var columnY = 250;
-var startTextX = 140;
-var startTextY = 260;
-var textY = 230;
-var gap = 50;
-var spaceBetween = columnWidth + gap;
+var CLOUD_WIDTH = 420;
+var CLOUD_HEIGHT = 270;
+var COLUMN_WIDTH = 40;
+var COLUMN_HEIGHT = 150;
+var COLUMN_Y = 250;
+var START_TEXT_X = 140;
+var START_TEXT_Y = 260;
+var TEXT_Y = 230;
+var GAP = 50;
+var spaceBetween = COLUMN_WIDTH + GAP;
 
 var makeCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
-  ctx.fillRect(x, y, cloudWidth, cloudHeight);
+  ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
 var makeText = function (ctx, x, y, text) {
@@ -41,15 +41,15 @@ var getMaxElement = function (arr) {
 var getColumn = function (ctx, i, namesArray, timesArray, maxTime) {
   var columnGap = spaceBetween * i;
   makeFill(ctx, 'rgba(0, 0, 0, 1)');
-  makeText(ctx, startTextX + columnGap, startTextY, namesArray[i]);
+  makeText(ctx, START_TEXT_X + columnGap, START_TEXT_Y, namesArray[i]);
 
   ctx.fillStyle = (namesArray[i] === 'Вы') ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' :
     ctx.fillStyle = 'rgba' + '(' + '31' + ', ' + '58' + ', ' + '147' + ', ' + Math.random() + ')';
 
-  var height = (timesArray[i] * columnHeight) / maxTime;
-  ctx.fillRect(startTextX + columnGap, columnY - height, columnWidth, height);
+  var height = (timesArray[i] * COLUMN_HEIGHT) / maxTime;
+  ctx.fillRect(START_TEXT_X + columnGap, COLUMN_Y - height, COLUMN_WIDTH, height);
   makeFill(ctx, 'rgba(0, 0, 0, 1)');
-  makeText(ctx, startTextX + columnGap, textY - height, Math.floor(timesArray[i]));
+  makeText(ctx, START_TEXT_X + columnGap, TEXT_Y - height, Math.floor(timesArray[i]));
 };
 
 
