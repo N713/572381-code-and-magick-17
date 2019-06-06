@@ -2,6 +2,7 @@
 
 var cloudWidth = 420;
 var cloudHeight = 270;
+var randomSaturation = Math.floor(Math.random() * 100);
 
 var makeCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -42,12 +43,9 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.globalAlpha = 1;
     makeText(ctx, 140 + columnGap, 260, names[i]);
 
-    if (names[i] === 'Вы') {
-      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
-    } else {
-      ctx.globalAlpha = Math.random();
-      ctx.fillStyle = 'hsl(240, 100%, 50%)';
-    }
+    names[i] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1)'
+                      :
+                      ctx.fillStyle = 'rgba' + '(' + '31' + ', ' +  '58' + ', ' + '147' + ', ' + Math.random() + ')';
 
     var height = (times[i] * 150) / maxTime;
     ctx.fillRect(140 + columnGap, 250 - height, 40, 0 + height);
