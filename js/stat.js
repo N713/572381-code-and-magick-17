@@ -38,16 +38,15 @@ var getColumn = function (ctx, i, namesArray, timesArray, maxTime) {
   ctx.globalAlpha = 1;
   makeText(ctx, startTextX + columnGap, startTextY, namesArray[i]);
 
-  namesArray[i] === 'Вы' ? ctx.fillStyle = 'rgba(255, 0, 0, 1)'
-                         :
-                         ctx.fillStyle = 'rgba' + '(' + '31' + ', ' +  '58' + ', ' + '147' + ', ' + Math.random() + ')';
+  ctx.fillStyle = (namesArray[i] === 'Вы') ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' :
+    ctx.fillStyle = 'rgba' + '(' + '31' + ', ' + '58' + ', ' + '147' + ', ' + Math.random() + ')';
 
   var height = (timesArray[i] * columnHeight) / maxTime;
   ctx.fillRect(startTextX + columnGap, columnY - height, columnWidth, height);
   ctx.fillStyle = '#000000';
   ctx.globalAlpha = 1;
   makeText(ctx, startTextX + columnGap, textY - height, Math.floor(timesArray[i]));
-}
+};
 
 
 window.renderStatistics = function (ctx, names, times) {
