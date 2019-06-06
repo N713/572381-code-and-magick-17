@@ -20,6 +20,12 @@ var makeText = function (ctx, x, y, text) {
   ctx.fillText(text, x, y);
 };
 
+var makeFill = function (ctx, color) {
+  var fill = ctx.fillStyle = color;
+
+  return fill;
+};
+
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
 
@@ -34,8 +40,7 @@ var getMaxElement = function (arr) {
 
 var getColumn = function (ctx, i, namesArray, timesArray, maxTime) {
   var columnGap = spaceBetween * i;
-  ctx.fillStyle = '#000000';
-  ctx.globalAlpha = 1;
+  makeFill(ctx, 'rgba(0, 0, 0, 1)');
   makeText(ctx, startTextX + columnGap, startTextY, namesArray[i]);
 
   ctx.fillStyle = (namesArray[i] === 'Вы') ? ctx.fillStyle = 'rgba(255, 0, 0, 1)' :
@@ -43,8 +48,7 @@ var getColumn = function (ctx, i, namesArray, timesArray, maxTime) {
 
   var height = (timesArray[i] * columnHeight) / maxTime;
   ctx.fillRect(startTextX + columnGap, columnY - height, columnWidth, height);
-  ctx.fillStyle = '#000000';
-  ctx.globalAlpha = 1;
+  makeFill(ctx, 'rgba(0, 0, 0, 1)');
   makeText(ctx, startTextX + columnGap, textY - height, Math.floor(timesArray[i]));
 };
 
@@ -55,7 +59,7 @@ window.renderStatistics = function (ctx, names, times) {
 
   ctx.font = '16px PT Mono';
   ctx.textBaseline = 'hanging';
-  ctx.fillStyle = '#000000';
+  makeFill(ctx, 'rgba(0, 0, 0, 1)');
   makeText(ctx, 120, 30, 'Ура вы победили!');
   makeText(ctx, 120, 50, 'Список результатов:');
 
