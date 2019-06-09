@@ -71,3 +71,31 @@ var getWizardsArray = function (numberOfWizards) {
 
   return wizards;
 };
+
+var renderWizard = function (wizardsArray) {
+  var similarWizard = similarWizardTemplate.cloneNode(true);
+
+  similarWizard.querySelector('.setup-similar-label').textContent = wizardsArray.name;
+  similarWizard.querySelector('.wizard-coat').style.fill = wizardsArray.coatColor;
+  similarWizard.querySelector('.wizard-eyes').style.fill = wizardsArray.eyesColor;
+
+  return similarWizard;
+};
+
+var NUMBER_OF_WIZARDS = 4;
+
+var wizards = getWizardsArray(NUMBER_OF_WIZARDS);
+
+var similarWizardList = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').
+  content.querySelector('.setup-similar-item');
+
+var fragment = document.createDocumentFragment();
+
+for (var i = 0; i < wizards.length; i++) {
+  fragment.appendChild(renderWizard(wizards[i]));
+};
+
+similarWizardList.appendChild(fragment);
+
+document.querySelector('.setup-similar').classList.remove('hidden');
