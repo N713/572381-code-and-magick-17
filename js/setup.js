@@ -39,6 +39,11 @@ var EYES_COLORS = [
   'green'
 ];
 
+var similarWizardList = document.querySelector('.setup-similar-list');
+var similarWizardTemplate = document.querySelector('#similar-wizard-template').
+content.querySelector('.setup-similar-item');
+var NUMBER_OF_WIZARDS = 4;
+
 var getRandomArrayElement = function (array) {
   var random = Math.floor(Math.random() * array.length);
 
@@ -70,12 +75,6 @@ var getWizardsArray = function (numberOfWizards) {
   return wizards;
 };
 
-var similarWizardList = document.querySelector('.setup-similar-list');
-var similarWizardTemplate = document.querySelector('#similar-wizard-template').
-content.querySelector('.setup-similar-item');
-var NUMBER_OF_WIZARDS = 4;
-var wizards = getWizardsArray(NUMBER_OF_WIZARDS);
-
 var renderWizard = function (wizardData) {
   var similarWizard = similarWizardTemplate.cloneNode(true);
 
@@ -90,13 +89,13 @@ var addWizards = function (wizardsArray) {
   var fragment = document.createDocumentFragment();
 
   for (var i = 0; i < wizardsArray.length; i++) {
-    fragment.appendChild(renderWizard(wizards[i]));
+    fragment.appendChild(renderWizard(getWizardsArray(NUMBER_OF_WIZARDS)[i]));
   }
 
   return fragment;
 };
 
-similarWizardList.appendChild(addWizards(wizards));
+similarWizardList.appendChild(addWizards(getWizardsArray(NUMBER_OF_WIZARDS)));
 
 document.querySelector('.setup').classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
