@@ -1,7 +1,5 @@
 'use strict';
 
-document.querySelector('.setup').classList.remove('hidden');
-
 var names = [
   'Иван',
   'Хуан Себастьян',
@@ -94,8 +92,9 @@ var fragment = document.createDocumentFragment();
 
 for (var i = 0; i < wizards.length; i++) {
   fragment.appendChild(renderWizard(wizards[i]));
-};
+}
 
 similarWizardList.appendChild(fragment);
 
+document.querySelector('.setup').classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
