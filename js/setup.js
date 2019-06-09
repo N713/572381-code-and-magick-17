@@ -1,8 +1,6 @@
 'use strict';
 
-document.querySelector('.setup').classList.remove('hidden');
-
-var names = [
+var NAMES = [
   'Иван',
   'Хуан Себастьян',
   'Мария',
@@ -13,7 +11,7 @@ var names = [
   'Вашингтон'
 ];
 
-var surNames = [
+var LAST_NAMES = [
   'да Марья',
   'Верон',
   'Мирабелла',
@@ -24,7 +22,7 @@ var surNames = [
   'Ирвинг'
 ];
 
-var coatColor = [
+var COAT_COLORS = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
   'rgb(146, 100, 161)',
@@ -33,7 +31,7 @@ var coatColor = [
   'rgb(0, 0, 0)'
 ];
 
-var eyesColor = [
+var EYES_COLORS = [
   'black',
   'red',
   'blue',
@@ -41,24 +39,24 @@ var eyesColor = [
   'green'
 ];
 
-var getRandom = function (array) {
+var getRandomArrayElement = function (array) {
   var random = Math.floor(Math.random() * array.length);
 
   return array[random];
 };
 
-var getRandomName = function (namesArray, surNamesArray) {
-  var firstName = getRandom(namesArray);
-  var secondName = getRandom(surNamesArray);
+var getRandomName = function (namesArray, lastNamesArray) {
+  var firstName = getRandomArrayElement(namesArray);
+  var secondName = getRandomArrayElement(lastNamesArray);
 
   return firstName + ' ' + secondName;
 };
 
 var getRandomWizard = function () {
   var randomWizard = {};
-  randomWizard.name = getRandomName(names, surNames);
-  randomWizard.coatColor = getRandom(coatColor);
-  randomWizard.eyesColor = getRandom(eyesColor);
+  randomWizard.name = getRandomName(NAMES, LAST_NAMES);
+  randomWizard.coatColor = getRandomArrayElement(COAT_COLORS);
+  randomWizard.eyesColor = getRandomArrayElement(EYES_COLORS);
 
   return randomWizard;
 };
@@ -78,12 +76,12 @@ content.querySelector('.setup-similar-item');
 var NUMBER_OF_WIZARDS = 4;
 var wizards = getWizardsArray(NUMBER_OF_WIZARDS);
 
-var renderWizard = function (wizardsArray) {
+var renderWizard = function (wizardData) {
   var similarWizard = similarWizardTemplate.cloneNode(true);
 
-  similarWizard.querySelector('.setup-similar-label').textContent = wizardsArray.name;
-  similarWizard.querySelector('.wizard-coat').style.fill = wizardsArray.coatColor;
-  similarWizard.querySelector('.wizard-eyes').style.fill = wizardsArray.eyesColor;
+  similarWizard.querySelector('.setup-similar-label').textContent = wizardData.name;
+  similarWizard.querySelector('.wizard-coat').style.fill = wizardData.coatColor;
+  similarWizard.querySelector('.wizard-eyes').style.fill = wizardData.eyesColor;
 
   return similarWizard;
 };
@@ -100,4 +98,5 @@ var addWizards = function (wizardsArray) {
 
 similarWizardList.appendChild(addWizards(wizards));
 
+document.querySelector('.setup').classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
