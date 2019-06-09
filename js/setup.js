@@ -1,5 +1,7 @@
 'use strict';
 
+document.querySelector('.setup').classList.remove('hidden');
+
 var names = [
   'Иван',
   'Хуан Себастьян',
@@ -98,5 +100,4 @@ var addWizards = function (wizardsArray) {
 
 similarWizardList.appendChild(addWizards(wizards));
 
-document.querySelector('.setup').classList.remove('hidden');
 document.querySelector('.setup-similar').classList.remove('hidden');
