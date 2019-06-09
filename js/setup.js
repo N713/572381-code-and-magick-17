@@ -39,10 +39,11 @@ var EYES_COLORS = [
   'green'
 ];
 
+var NUMBER_OF_WIZARDS = 4;
+
 var similarWizardList = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').
-content.querySelector('.setup-similar-item');
-var NUMBER_OF_WIZARDS = 4;
+  content.querySelector('.setup-similar-item');
 
 var getRandomArrayElement = function (array) {
   var random = Math.floor(Math.random() * array.length);
