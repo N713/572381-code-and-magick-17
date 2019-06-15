@@ -141,8 +141,6 @@ var onEyesClick = function () {
   var color = getRandomArrayElement(EYES_COLORS);
   wizardEyes.style = 'fill: ' + color + '';
   wizardEyesInput.value = '' + color;
-
-  console.log(wizardEyes);
 };
 
 var onFireballClick = function () {
@@ -151,21 +149,21 @@ var onFireballClick = function () {
   fireballInput.value = '' + color;
 };
 
-setupOpen.addEventListener('click', function() {
+setupOpen.addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function(evt) {
+setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function() {
+setupClose.addEventListener('click', function () {
   closePopup();
 });
 
-setupClose.addEventListener('keydown', function(evt) {
+setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
