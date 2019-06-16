@@ -133,20 +133,20 @@ var closePopup = function () {
 
 var onCoatClick = function () {
   var color = getRandomArrayElement(COAT_COLORS);
-  wizardCoat.style.fill = '' + color;
-  wizardCoatInput.value = '' + color;
+  wizardCoat.style.fill = color;
+  wizardCoatInput.value = color;
 };
 
 var onEyesClick = function () {
   var color = getRandomArrayElement(EYES_COLORS);
-  wizardEyes.style.fill = '' + color;
-  wizardEyesInput.value = '' + color;
+  wizardEyes.style.fill = color;
+  wizardEyesInput.value = color;
 };
 
 var onFireballClick = function () {
   var color = getRandomArrayElement(FIREBALL_COLORS);
-  fireball.style.backgroundColor = '' + color;
-  fireballInput.value = '' + color;
+  fireball.style.backgroundColor = color;
+  fireballInput.value = color;
 };
 
 setupPopupOpen.addEventListener('click', function () {
