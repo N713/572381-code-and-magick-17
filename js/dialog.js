@@ -2,6 +2,7 @@
 
 var setupPopup = document.querySelector('.setup');
 var uploadBlock = setupPopup.querySelector('.upload');
+var artifact = setupPopup.querySelector('.setup-artifacts-cell').firstElementChild;
 
 uploadBlock.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -11,8 +12,11 @@ uploadBlock.addEventListener('mousedown', function (evt) {
     y: evt.clientY
   };
 
+  var isDragged = false;
+
   var onUploadBlockMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
+    isDragged = true;
 
     var shift = {
       x: startCoords.x - moveEvt.clientX,
@@ -34,8 +38,21 @@ uploadBlock.addEventListener('mousedown', function (evt) {
 
     document.removeEventListener('mousemove', onUploadBlockMouseMove);
     document.removeEventListener('mouseup', onUploadBlockMouseUp);
+
+    if (isDragged) {
+      var onClickPreventDefault = function (evt) {
+        evt.preventDefault();
+        uploadBlock.removeEventListener('click', onClickPreventDefault);
+      };
+      uploadBlock.addEventListener('click', onClickPreventDefault);
+    }
+
   };
 
   document.addEventListener('mousemove', onUploadBlockMouseMove);
   document.addEventListener('mouseup', onUploadBlockMouseUp);
+});
+
+artifact.addEventListener('mousedown', function (evt) {
+
 });
