@@ -63,6 +63,8 @@ var wizardEyes = setupPopup.querySelector('.wizard-eyes');
 var wizardEyesInput = setupPopup.querySelector('input[name="eyes-color"]');
 var fireball = setupPopup.querySelector('.setup-fireball');
 var fireballInput = setupPopup.querySelector('input[name="fireball-color"]');
+var setupCurrentTop = setupPopup.style.top;
+var setupCurrentLeft = setupPopup.style.left;
 
 var getRandomArrayElement = function (array) {
   var random = Math.floor(Math.random() * array.length);
@@ -129,6 +131,8 @@ var openPopup = function () {
 var closePopup = function () {
   setupPopup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
+  setupPopup.style.top = setupCurrentTop;
+  setupPopup.style.left = setupCurrentLeft;
 };
 
 var onCoatClick = function () {

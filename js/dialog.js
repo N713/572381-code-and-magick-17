@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 var setupPopup = document.querySelector('.setup');
 var uploadBlock = setupPopup.querySelector('.upload');
@@ -40,8 +40,8 @@ uploadBlock.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mouseup', onUploadBlockMouseUp);
 
     if (isDragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
+      var onClickPreventDefault = function (evtent) {
+        evtent.preventDefault();
         uploadBlock.removeEventListener('click', onClickPreventDefault);
       };
       uploadBlock.addEventListener('click', onClickPreventDefault);
@@ -54,5 +54,35 @@ uploadBlock.addEventListener('mousedown', function (evt) {
 });
 
 artifact.addEventListener('mousedown', function (evt) {
+  artifact.style.position = 'absolute';
 
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+
+  var onArtifactMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    artifact.style.top = (artifact.offsetTop - shift.y) + 'px';
+    artifact.style.left = (artifact.offsetLeft - shift.x) + 'px';
+  };
+
+  var onArtifactMouseUp = function () {
+    document.removeEventListener('mousemove', onArtifactMouseMove);
+    document.removeEventListener('mouseup', onArtifactMouseUp);
+  };
+
+  document.addEventListener('mousemove', onArtifactMouseMove);
+  document.addEventListener('mouseup', onArtifactMouseUp);
 });
