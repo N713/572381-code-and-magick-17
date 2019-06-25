@@ -3,86 +3,64 @@
 var setupPopup = document.querySelector('.setup');
 var uploadBlock = setupPopup.querySelector('.upload');
 var artifact = setupPopup.querySelector('.setup-artifacts-cell').firstElementChild;
+var artifactCell = setupPopup.querySelector('.setup-artifacts-cell');
 
-uploadBlock.addEventListener('mousedown', function (evt) {
-  evt.preventDefault();
+var makeMoveable = function (element) {
+  element.addEventListener('mousedown', function (evt) {
+    evt.preventDefault();
 
-  var startCoords = {
-    x: evt.clientX,
-    y: evt.clientY
-  };
-
-  var isDragged = false;
-
-  var onUploadBlockMouseMove = function (moveEvt) {
-    moveEvt.preventDefault();
-    isDragged = true;
-
-    var shift = {
-      x: startCoords.x - moveEvt.clientX,
-      y: startCoords.y - moveEvt.clientY
-    };
-
-    startCoords = {
-      x: moveEvt.clientX,
-      y: moveEvt.clientY
-    };
-
-    setupPopup.style.top = (setupPopup.offsetTop - shift.y) + 'px';
-    setupPopup.style.left = (setupPopup.offsetLeft - shift.x) + 'px';
-
-  };
-
-  var onUploadBlockMouseUp = function (upEvt) {
-    upEvt.preventDefault();
-
-    document.removeEventListener('mousemove', onUploadBlockMouseMove);
-    document.removeEventListener('mouseup', onUploadBlockMouseUp);
-
-    if (isDragged) {
-      var onClickPreventDefault = function (evtent) {
-        evtent.preventDefault();
-        uploadBlock.removeEventListener('click', onClickPreventDefault);
-      };
-      uploadBlock.addEventListener('click', onClickPreventDefault);
+    if (element !== uploadBlock) {
+      element.style.position = 'absolute';
     }
 
-  };
-
-  document.addEventListener('mousemove', onUploadBlockMouseMove);
-  document.addEventListener('mouseup', onUploadBlockMouseUp);
-});
-
-artifact.addEventListener('mousedown', function (evt) {
-  artifact.style.position = 'absolute';
-
-  var startCoords = {
-    x: evt.clientX,
-    y: evt.clientY
-  };
-
-  var onArtifactMouseMove = function (moveEvt) {
-    moveEvt.preventDefault();
-
-    var shift = {
-      x: startCoords.x - moveEvt.clientX,
-      y: startCoords.y - moveEvt.clientY
+    var startCoords = {
+      x: evt.clientX,
+      y: evt.clientY
     };
 
-    startCoords = {
-      x: moveEvt.clientX,
-      y: moveEvt.clientY
+    var isDragged = false;
+
+    var onElementMouseMove = function (moveEvt) {
+      moveEvt.preventDefault();
+      isDragged = true;
+
+      var shift = {
+        x: startCoords.x - moveEvt.clientX,
+        y: startCoords.y - moveEvt.clientY
+      };
+
+      startCoords = {
+        x: moveEvt.clientX,
+        y: moveEvt.clientY
+      };
+
+      if (element === uploadBlock) {
+        element = setupPopup;
+      }
+
+      element.style.top = (element.offsetTop - shift.y) + 'px';
+      element.style.left = (element.offsetLeft - shift.x) + 'px';
     };
 
-    artifact.style.top = (artifact.offsetTop - shift.y) + 'px';
-    artifact.style.left = (artifact.offsetLeft - shift.x) + 'px';
-  };
+    var onElementMouseUp = function (upEvt) {
+      upEvt.preventDefault();
 
-  var onArtifactMouseUp = function () {
-    document.removeEventListener('mousemove', onArtifactMouseMove);
-    document.removeEventListener('mouseup', onArtifactMouseUp);
-  };
+      if (isDragged) {
+        var onClickPreventDefault = function (evtent) {
+          evtent.preventDefault();
+          uploadBlock.removeEventListener('click', onClickPreventDefault);
+        };
+        uploadBlock.addEventListener('click', onClickPreventDefault);
+      }
 
-  document.addEventListener('mousemove', onArtifactMouseMove);
-  document.addEventListener('mouseup', onArtifactMouseUp);
-});
+      document.removeEventListener('mousemove', onElementMouseMove);
+      document.removeEventListener('mouseup', onElementMouseUp);
+    };
+
+    document.addEventListener('mousemove', onElementMouseMove);
+    document.addEventListener('mouseup', onElementMouseUp);
+  });
+};
+
+makeMoveable(artifact);
+makeMoveable(uploadBlock);
