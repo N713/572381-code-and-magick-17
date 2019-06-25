@@ -3,7 +3,6 @@
 var setupPopup = document.querySelector('.setup');
 var uploadBlock = setupPopup.querySelector('.upload');
 var artifact = setupPopup.querySelector('.setup-artifacts-cell').firstElementChild;
-var artifactCell = setupPopup.querySelector('.setup-artifacts-cell');
 
 var makeMoveable = function (element) {
   element.addEventListener('mousedown', function (evt) {
